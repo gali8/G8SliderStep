@@ -1,6 +1,5 @@
 # G8SliderStep
------
-G8SliderStep: A custom range UISlider for iOS, written in Swift - Totally @IBInspectable
+### G8SliderStep: A custom range UISlider for iOS, written in Swift - Totally @IBInspectable
 
 
 How it works
@@ -58,7 +57,8 @@ How to use:
 TODO
 
 
-### Code configuration
+## Example Usage
+### By Code
 ```swift
 @IBOutlet weak var sliderStep: G8SliderStep!
 
@@ -80,7 +80,7 @@ override func viewDidLoad() {
     }
 ```
 
-### Storyboard configuration
+### By Storyboard
 <p align="center">
 <img style="-webkit-user-select: none;" src="https://github.com/gali8/G8SliderStep/raw/master/Images/Storyboard.png" width="320px">
 </p>
