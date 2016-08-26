@@ -1,6 +1,6 @@
 # G8SliderStep
 ===========
-***Custom Range UISlider for iOS, in Swift - Totally @IBInspectable ***
+*** Custom Range UISlider for iOS, in Swift - Totally @IBInspectable ***
 
 
 How it works
