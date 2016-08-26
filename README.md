@@ -44,6 +44,11 @@ ToDo:
 -----
 - Add CocoaPods support
 
+Release note:
+-----
+##### v1.1
+- .ValueChanged event invoked on slider tap.
+
 How to use:
 -----
 ### Manual
