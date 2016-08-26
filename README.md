@@ -5,7 +5,6 @@
 
 How it works
 -----
------
 <p align="center">
 <img style="-webkit-user-select: none;" src="https://github.com/gali8/G8SliderStep/raw/master/Images/G8SliderStep.gif" width="320px">
 </p>
@@ -14,7 +13,6 @@ How it works
 </p>
 
 Samples
------
 -----
 <p align="center">
 <img style="-webkit-user-select: none;" src="https://github.com/gali8/G8SliderStep/raw/master/Images/Sample1.png" width="320px">
@@ -34,7 +32,6 @@ Samples
 
 Features:
 -----
------
 - Ready to use
 - Easy customization (font, colors, images, ticks...)
 - @IBInspectable
@@ -45,11 +42,9 @@ Features:
 
 ToDo:
 -----
------
 - Add CocoaPods support
 
 How to use:
------
 -----
 ### Manual
 - Import G8SliderStep.swift in you project
@@ -89,15 +84,11 @@ override func viewDidLoad() {
 
 
 License
------
 =================
-
 G8MaterialKitTextField is distributed under the MIT
 license (see LICENSE.md).
 
 Contributors
------
 =================
-
 ***Daniele Galiotto*** (founder) - iOS Freelance Developer -
 **[www.g8production.com](http://www.g8production.com)**
