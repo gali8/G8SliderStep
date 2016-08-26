@@ -85,6 +85,15 @@ override func viewDidLoad() {
 <img style="-webkit-user-select: none;" src="https://github.com/gali8/G8SliderStep/raw/master/Images/Storyboard.png" width="320px">
 </p>
 
+Buy me a beer
+=================
+##### If you like my work, please buy me a beer 
+<p align="center">
+<a href="http://www.g8production.com/Beer#_=_" alt="If you like my work, please buy me a beer ">
+<img style="-webkit-user-select: none;" src="http://67.media.tumblr.com/3243ca9030c3fa14ca3042344ae3d510/tumblr_inline_ng26w7z8SG1qmlajm.png">
+</a>
+</p>
+
 License
 =================
 G8SliderStep is distributed under the MIT
