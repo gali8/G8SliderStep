@@ -1,11 +1,11 @@
 # G8SliderStep
-#### A custom range UISlider for iOS, written in Swift - Totally @IBInspectable
+#### A custom range UISlider for iOS, written in Swift - Draggable, Tappable, @IBInspectable
  
   
 How it works
 -----
 <p align="center">
-<img style="-webkit-user-select: none;" src="https://github.com/gali8/G8SliderStep/raw/master/Images/G8SliderStep.gif" width="320px">
+<img style="-webkit-user-select: none;" src="https://github.com/gali8/G8SliderStep/raw/master/Images/G8SliderStep.gif" width="400px">
 </p>
 <p align="center">
 <img style="-webkit-user-select: none;" src="https://github.com/gali8/G8SliderStep/raw/master/Images/Sample0.png" width="320px">
