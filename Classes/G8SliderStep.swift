@@ -69,14 +69,14 @@ class G8SliderStep: UISlider {
         if self.highlighted {
             return
         }
-
+        
         let pointTapped: CGPoint = gestureRecognizer.locationInView(self)
         let percentage = Float(pointTapped.x / trackWidth)
         let delta = percentage * (maximumValue - minimumValue)
         let newValue = minimumValue + delta
         
         self.setValue(newValue, animated: false)
-        didMoveSliderStepValue()
+        didMoveSliderStepValue(true)
     }
     
     internal func movingSliderStepValue() {
@@ -86,7 +86,7 @@ class G8SliderStep: UISlider {
         setThumbForSliderValue(floatValue)
     }
     
-    internal func didMoveSliderStepValue() {
+    internal func didMoveSliderStepValue(sendValueChangedEvent: Bool = false) {
         let intValue = Int(round(self.value))
         let floatValue = Float(intValue)
         
@@ -94,6 +94,9 @@ class G8SliderStep: UISlider {
             self.setValue(floatValue, animated: true)
         }) { (fin) in
             self.setThumbForSliderValue(floatValue)
+            if sendValueChangedEvent {
+                self.sendActionsForControlEvents(.ValueChanged)
+            }
         }
     }
     
@@ -137,7 +140,7 @@ class G8SliderStep: UISlider {
             print("G8SliderStep ERROR: minimumValue AND maximumValue need to be UInt (not Float). EXIT.")
             return
         }
-
+        
         guard let images = stepImages where images.count == Int((maximumValue - minimumValue + 1)) else {
             print("G8SliderStep ERROR: images is nil OR images.count != (maximumValue - minimumValue + 1). EXIT.")
             return
@@ -178,7 +181,7 @@ class G8SliderStep: UISlider {
                 l.removeFromSuperview()
             }
             _stepTickLabels?.removeAll()
-
+            
             for index in 0..<ti.count {
                 let title = ti[index]
                 let lbl = UILabel()
@@ -314,12 +317,12 @@ class G8SliderStep: UISlider {
         
         CGContextRestoreGState(ctx)
     }
-
+    
     //Avoid exc bad access on viewcontroller view did load
     override func prepareForInterfaceBuilder() {
         super.prepareForInterfaceBuilder()
         drawTrack()
         self.value = self.minimumValue
     }
-
+    
 }
