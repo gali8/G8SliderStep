@@ -47,7 +47,7 @@ ToDo:
 How to use:
 -----
 ### Manual
-- Import G8SliderStep.swift in you project
+- Import G8SliderStep.swift into you project
 - Add UISlider in you Storyboard file
 - Set the UISlider class to G8SliderStep
 - Configure your slider by storyboard or/and by code 
@@ -80,12 +80,13 @@ override func viewDidLoad() {
 ```
 
 ### Storyboard configuration
-
-
+<p align="center">
+<img style="-webkit-user-select: none;" src="https://github.com/gali8/G8SliderStep/raw/master/Images/Storyboard.png" width="320px">
+</p>
 
 License
 =================
-G8MaterialKitTextField is distributed under the MIT
+G8SliderStep is distributed under the MIT
 license (see LICENSE.md).
 
 Contributors
