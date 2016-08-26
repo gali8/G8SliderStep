@@ -1,6 +1,6 @@
 # G8SliderStep
-===========
-*** Custom Range UISlider for iOS, in Swift - Totally @IBInspectable ***
+-----
+G8SliderStep: A custom range UISlider for iOS, written in Swift - Totally @IBInspectable ***
 
 
 How it works
@@ -39,6 +39,7 @@ Features:
 - Draggable
 - Titles support
 - Rotation support
+- Swift 2 support
 
 ToDo:
 -----
