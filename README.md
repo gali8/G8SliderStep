@@ -53,6 +53,30 @@ How to use:
 - Configure your slider by storyboard or/and by code 
 - Enjoy :)
 
+####Customizable properties
+```swift
+    @IBInspectable var enableTap: Bool = true
+    @IBInspectable var trackHeight: Float = 4
+    @IBInspectable var trackColor: UIColor = UIColor.lightGrayColor()
+    @IBInspectable var drawTicks: Bool = true
+    @IBInspectable var stepTickWidth: Float = 15
+    @IBInspectable var stepTickHeight: Float = 15
+    @IBInspectable var stepTickColor: UIColor = UIColor.lightGrayColor()
+    @IBInspectable var stepTickRounded: Bool = true
+    @IBInspectable var unselectedFont: UIFont = UIFont.systemFontOfSize(13)
+    @IBInspectable var selectedFont: UIFont = UIFont.systemFontOfSize(13)
+    @IBInspectable var stepTitlesOffset: CGFloat = 1
+    
+    var customTrack: Bool = true
+    
+    ///Requireds
+    var stepImages: [UIImage]?
+    
+    //Optionals
+    var tickTitles: [String]?
+    var tickImages: [UIImage]?
+```
+
 ### CocoaPods
 TODO
 
