@@ -56,6 +56,10 @@ How to use:
 ### CocoaPods
 TODO
 
+## Requirements
+
+* iOS 8.0+
+* Xcode 7.3.1+
 
 ## Example Usage
 ### By Code
