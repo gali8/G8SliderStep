@@ -256,7 +256,7 @@ class G8SliderStep: UISlider {
     internal func drawTrack() {
         
         let ctx = UIGraphicsGetCurrentContext()
-        CGContextSaveGState(ctx)
+        CGContextSaveGState(ctx!)
         
         // Remove the original track if custom
         if customTrack {
@@ -269,20 +269,20 @@ class G8SliderStep: UISlider {
             setMinimumTrackImage(transparentImage, forState: .Normal)
             
             // Draw custom track
-            CGContextSetFillColorWithColor(ctx, trackColor.CGColor)
+            CGContextSetFillColorWithColor(ctx!, trackColor.CGColor)
             let x = trackLeftOffset
             let y = bounds.midY - CGFloat(trackHeight / 2)
             let rect = CGRect(x: x, y: y, width: bounds.width - trackLeftOffset - trackRightOffset, height: CGFloat(trackHeight))
             let trackPath = UIBezierPath(rect: rect)
             
-            CGContextAddPath(ctx, trackPath.CGPath)
-            CGContextFillPath(ctx)
+            CGContextAddPath(ctx!, trackPath.CGPath)
+            CGContextFillPath(ctx!)
         }
         
         
         if drawTicks {
             // Draw ticks
-            CGContextSetFillColorWithColor(ctx, stepTickColor.CGColor)
+            CGContextSetFillColorWithColor(ctx!, stepTickColor.CGColor)
             
             for index in 0...steps {
                 
@@ -310,12 +310,12 @@ class G8SliderStep: UISlider {
                     stepPath = UIBezierPath(rect: rect)
                 }
                 
-                CGContextAddPath(ctx, stepPath.CGPath)
-                CGContextFillPath(ctx)
+                CGContextAddPath(ctx!, stepPath.CGPath)
+                CGContextFillPath(ctx!)
             }
         }
         
-        CGContextRestoreGState(ctx)
+        CGContextRestoreGState(ctx!)
     }
     
     //Avoid exc bad access on viewcontroller view did load
