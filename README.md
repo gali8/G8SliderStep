@@ -46,6 +46,14 @@ ToDo:
 
 Release note:
 -----
+
+##### v2.0
+- Swift 3 support: use branch master
+
+##### v1.4
+- Swift 2.3 support: use branch swift_2.3
+- Swift 2 branch moved: use old branch swift_2.x
+
 ##### v1.1
 - .ValueChanged event invoked on slider tap.
 
