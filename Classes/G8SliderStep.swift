@@ -7,19 +7,43 @@
 //
 
 import UIKit
+// FIXME: comparison operators with optionals were removed from the Swift Standard Libary.
+// Consider refactoring the code to use the non-optional operators.
+fileprivate func < <T : Comparable>(lhs: T?, rhs: T?) -> Bool {
+  switch (lhs, rhs) {
+  case let (l?, r?):
+    return l < r
+  case (nil, _?):
+    return true
+  default:
+    return false
+  }
+}
+
+// FIXME: comparison operators with optionals were removed from the Swift Standard Libary.
+// Consider refactoring the code to use the non-optional operators.
+fileprivate func > <T : Comparable>(lhs: T?, rhs: T?) -> Bool {
+  switch (lhs, rhs) {
+  case let (l?, r?):
+    return l > r
+  default:
+    return rhs < lhs
+  }
+}
+
 
 class G8SliderStep: UISlider {
     
     @IBInspectable var enableTap: Bool = true
     @IBInspectable var trackHeight: Float = 4
-    @IBInspectable var trackColor: UIColor = UIColor.lightGrayColor()
+    @IBInspectable var trackColor: UIColor = UIColor.lightGray
     @IBInspectable var drawTicks: Bool = true
     @IBInspectable var stepTickWidth: Float = 15
     @IBInspectable var stepTickHeight: Float = 15
-    @IBInspectable var stepTickColor: UIColor = UIColor.lightGrayColor()
+    @IBInspectable var stepTickColor: UIColor = UIColor.lightGray
     @IBInspectable var stepTickRounded: Bool = true
-    @IBInspectable var unselectedFont: UIFont = UIFont.systemFontOfSize(13)
-    @IBInspectable var selectedFont: UIFont = UIFont.systemFontOfSize(13)
+    @IBInspectable var unselectedFont: UIFont = UIFont.systemFont(ofSize: 13)
+    @IBInspectable var selectedFont: UIFont = UIFont.systemFont(ofSize: 13)
     @IBInspectable var stepTitlesOffset: CGFloat = 1
     
     var customTrack: Bool = true
@@ -31,8 +55,8 @@ class G8SliderStep: UISlider {
     var tickTitles: [String]?
     var tickImages: [UIImage]?
     
-    private var _stepTickLabels: [UILabel]?
-    private var _stepTickImages: [UIImageView]?
+    fileprivate var _stepTickLabels: [UILabel]?
+    fileprivate var _stepTickImages: [UIImageView]?
     
     var stepWidth: Double {
         return Double(trackWidth) / Double(steps)
@@ -54,23 +78,23 @@ class G8SliderStep: UISlider {
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        self.contentMode = .Redraw //enable redraw on rotation (calls setNeedsDisplay)
+        self.contentMode = .redraw //enable redraw on rotation (calls setNeedsDisplay)
         
         if enableTap {
             let tap = UITapGestureRecognizer(target: self, action: #selector(G8SliderStep.sliderTapped(_:)))
             self.addGestureRecognizer(tap)
         }
         
-        self.addTarget(self, action: #selector(G8SliderStep.movingSliderStepValue), forControlEvents: .ValueChanged)
-        self.addTarget(self, action: #selector(G8SliderStep.didMoveSliderStepValue), forControlEvents: [.TouchUpInside, .TouchUpOutside, .TouchCancel])
+        self.addTarget(self, action: #selector(G8SliderStep.movingSliderStepValue), for: .valueChanged)
+        self.addTarget(self, action: #selector(G8SliderStep.didMoveSliderStepValue), for: [.touchUpInside, .touchUpOutside, .touchCancel])
     }
     
-    internal func sliderTapped(gestureRecognizer: UIGestureRecognizer) {
-        if self.highlighted {
+    internal func sliderTapped(_ gestureRecognizer: UIGestureRecognizer) {
+        if self.isHighlighted {
             return
         }
         
-        let pointTapped: CGPoint = gestureRecognizer.locationInView(self)
+        let pointTapped: CGPoint = gestureRecognizer.location(in: self)
         let percentage = Float(pointTapped.x / trackWidth)
         let delta = percentage * (maximumValue - minimumValue)
         let newValue = minimumValue + delta
@@ -86,29 +110,29 @@ class G8SliderStep: UISlider {
         setThumbForSliderValue(floatValue)
     }
     
-    internal func didMoveSliderStepValue(sendValueChangedEvent: Bool = false) {
+    internal func didMoveSliderStepValue(_ sendValueChangedEvent: Bool = false) {
         let intValue = Int(round(self.value))
         let floatValue = Float(intValue)
         
-        UIView.animateWithDuration(0.15, animations: {
+        UIView.animate(withDuration: 0.15, animations: {
             self.setValue(floatValue, animated: true)
-        }) { (fin) in
+        }, completion: { (fin) in
             self.setThumbForSliderValue(floatValue)
             if sendValueChangedEvent {
-                self.sendActionsForControlEvents(.ValueChanged)
+                self.sendActions(for: .valueChanged)
             }
-        }
+        }) 
     }
     
-    internal func setThumbForSliderValue(value: Float) {
+    internal func setThumbForSliderValue(_ value: Float) {
         if let selectionImage = thumbForSliderValue(value) {
-            self.setThumbImage(selectionImage, forState: UIControlState.Normal)
-            self.setThumbImage(selectionImage, forState: UIControlState.Selected)
-            self.setThumbImage(selectionImage, forState: UIControlState.Highlighted)
+            self.setThumbImage(selectionImage, for: UIControlState())
+            self.setThumbImage(selectionImage, for: UIControlState.selected)
+            self.setThumbImage(selectionImage, for: UIControlState.highlighted)
         }
     }
     
-    internal func thumbForSliderValue(value: Float) -> UIImage? {
+    internal func thumbForSliderValue(_ value: Float) -> UIImage? {
         let intValue = Int(round(value))
         let imageIndex = intValue - Int(minimumValue)
         
@@ -119,13 +143,13 @@ class G8SliderStep: UISlider {
         return nil
     }
     
-    internal func rectForValue(value: Float) -> CGRect {
-        let trackRect = trackRectForBounds(bounds)
-        let rect = thumbRectForBounds(bounds, trackRect: trackRect, value: value)
+    internal func rectForValue(_ value: Float) -> CGRect {
+        let trackRect = self.trackRect(forBounds: bounds)
+        let rect = thumbRect(forBounds: bounds, trackRect: trackRect, value: value)
         return rect
     }
     
-    override func drawRect(rect: CGRect) {
+    override func draw(_ rect: CGRect) {
         guard minimumValue >= 0 && maximumValue > minimumValue else {
             print("G8SliderStep ERROR: minimumValue AND maximumValue need to be UInt: maximumValue < minimumValue OR minimumValue < 0 OR maximumValue < 0. EXIT.")
             return
@@ -141,7 +165,7 @@ class G8SliderStep: UISlider {
             return
         }
         
-        guard let images = stepImages where images.count == Int((maximumValue - minimumValue + 1)) else {
+        guard let images = stepImages, images.count == Int((maximumValue - minimumValue + 1)) else {
             print("G8SliderStep ERROR: images is nil OR images.count != (maximumValue - minimumValue + 1). EXIT.")
             return
         }
@@ -187,7 +211,7 @@ class G8SliderStep: UISlider {
                 let lbl = UILabel()
                 lbl.font = unselectedFont
                 lbl.text = title
-                lbl.textAlignment = .Center
+                lbl.textAlignment = .center
                 lbl.sizeToFit()
                 
                 var offset: CGFloat = 0
@@ -229,7 +253,7 @@ class G8SliderStep: UISlider {
             for index in 0..<ti.count {
                 let img = ti[index]
                 let imv = UIImageView(image: img)
-                imv.contentMode = .ScaleAspectFit
+                imv.contentMode = .scaleAspectFit
                 imv.sizeToFit()
                 
                 var offset: CGFloat = 0
@@ -247,7 +271,7 @@ class G8SliderStep: UISlider {
                 rect.origin.x = x
                 rect.origin.y = bounds.midY - (bounds.size.height / 2)
                 imv.frame = rect
-                self.insertSubview(imv, atIndex: 2) //index 2 => draw images below the thumb/above the line
+                self.insertSubview(imv, at: 2) //index 2 => draw images below the thumb/above the line
                 _stepTickImages?.append(imv)
             }
         }
@@ -256,33 +280,33 @@ class G8SliderStep: UISlider {
     internal func drawTrack() {
         
         let ctx = UIGraphicsGetCurrentContext()
-        CGContextSaveGState(ctx)
+        ctx?.saveGState()
         
         // Remove the original track if custom
         if customTrack {
             
             // Clear original track using a transparent pixel
-            UIGraphicsBeginImageContextWithOptions(CGSizeMake(1, 1), false, 0.0)
+            UIGraphicsBeginImageContextWithOptions(CGSize(width: 1, height: 1), false, 0.0)
             let transparentImage = UIGraphicsGetImageFromCurrentImageContext()
             UIGraphicsEndImageContext()
-            setMaximumTrackImage(transparentImage, forState: .Normal)
-            setMinimumTrackImage(transparentImage, forState: .Normal)
+            setMaximumTrackImage(transparentImage, for: UIControlState())
+            setMinimumTrackImage(transparentImage, for: UIControlState())
             
             // Draw custom track
-            CGContextSetFillColorWithColor(ctx, trackColor.CGColor)
+            ctx?.setFillColor(trackColor.cgColor)
             let x = trackLeftOffset
             let y = bounds.midY - CGFloat(trackHeight / 2)
             let rect = CGRect(x: x, y: y, width: bounds.width - trackLeftOffset - trackRightOffset, height: CGFloat(trackHeight))
             let trackPath = UIBezierPath(rect: rect)
             
-            CGContextAddPath(ctx, trackPath.CGPath)
-            CGContextFillPath(ctx)
+            ctx?.addPath(trackPath.cgPath)
+            ctx?.fillPath()
         }
         
         
         if drawTicks {
             // Draw ticks
-            CGContextSetFillColorWithColor(ctx, stepTickColor.CGColor)
+            ctx?.setFillColor(stepTickColor.cgColor)
             
             for index in 0...steps {
                 
@@ -310,12 +334,12 @@ class G8SliderStep: UISlider {
                     stepPath = UIBezierPath(rect: rect)
                 }
                 
-                CGContextAddPath(ctx, stepPath.CGPath)
-                CGContextFillPath(ctx)
+                ctx?.addPath(stepPath.cgPath)
+                ctx?.fillPath()
             }
         }
         
-        CGContextRestoreGState(ctx)
+        ctx?.restoreGState()
     }
     
     //Avoid exc bad access on viewcontroller view did load

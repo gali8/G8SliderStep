@@ -22,8 +22,8 @@ class G8SliderStepViewController: UIViewController {
         sliderStep.tickImages = [shape, shape, shape]
         sliderStep.minimumValue = 2
         sliderStep.maximumValue = Float(sliderStep.stepImages!.count) + sliderStep.minimumValue - 1.0
-        sliderStep.trackColor = UIColor.darkGrayColor()
-        sliderStep.stepTickColor = UIColor.orangeColor()
+        sliderStep.trackColor = UIColor.darkGray
+        sliderStep.stepTickColor = UIColor.orange
         sliderStep.stepTickWidth = 30
         sliderStep.stepTickHeight = 30
         sliderStep.trackHeight = 10
