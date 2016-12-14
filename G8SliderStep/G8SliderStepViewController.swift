@@ -27,6 +27,7 @@ class G8SliderStepViewController: UIViewController {
         sliderStep.stepTickWidth = 30
         sliderStep.stepTickHeight = 30
         sliderStep.trackHeight = 10
+        sliderStep.value = 3
     }
 
     override func didReceiveMemoryWarning() {
