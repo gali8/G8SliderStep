@@ -46,7 +46,7 @@ ToDo:
 
 Release note:
 -----
-##### v2.1
+##### v2.0.1
 - Master supports sliderStep.value programmatically
 
 ##### v2.0
