@@ -46,6 +46,8 @@ ToDo:
 
 Release note:
 -----
+##### v2.1
+- Master supports sliderStep.value programmatically
 
 ##### v2.0
 - Swift 3 support: use branch master
