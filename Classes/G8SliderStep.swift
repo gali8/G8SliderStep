@@ -42,33 +42,33 @@ class G8SliderStep: UISlider {
     @IBInspectable var selectedFont: UIFont = UIFont.systemFont(ofSize: 13)
     @IBInspectable var stepTitlesOffset: CGFloat = 1
     
-    var customTrack: Bool = true
+    @objc var customTrack: Bool = true
     
     ///Requireds
-    var stepImages: [UIImage]?
+    @objc var stepImages: [UIImage]?
     
     //Optionals
-    var tickTitles: [String]?
-    var tickImages: [UIImage]?
+    @objc var tickTitles: [String]?
+    @objc var tickImages: [UIImage]?
     
     fileprivate var _stepTickLabels: [UILabel]?
     fileprivate var _stepTickImages: [UIImageView]?
     
-    var stepWidth: Double {
+    @objc var stepWidth: Double {
         return Double(trackWidth) / Double(steps)
     }
-    var trackWidth: CGFloat {
+    @objc var trackWidth: CGFloat {
         return self.bounds.size.width
     }
-    var trackLeftOffset: CGFloat {
+    @objc var trackLeftOffset: CGFloat {
         let rect = rectForValue(minimumValue)
         return rect.width / 2
     }
-    var trackRightOffset: CGFloat {
+    @objc var trackRightOffset: CGFloat {
         let rect = rectForValue(maximumValue)
         return rect.width / 2
     }
-    var steps: Int {
+    @objc var steps: Int {
         return Int(maximumValue - minimumValue)
     }
     
@@ -91,7 +91,7 @@ class G8SliderStep: UISlider {
         self.addTarget(self, action: #selector(G8SliderStep.didMoveSliderStepValue), for: [.touchUpInside, .touchUpOutside, .touchCancel])
     }
     
-    internal func sliderTapped(_ gestureRecognizer: UIGestureRecognizer) {
+    @objc internal func sliderTapped(_ gestureRecognizer: UIGestureRecognizer) {
         if self.isHighlighted {
             return
         }
@@ -105,14 +105,14 @@ class G8SliderStep: UISlider {
         didMoveSliderStepValue(true)
     }
     
-    internal func movingSliderStepValue() {
+    @objc internal func movingSliderStepValue() {
         let intValue = Int(round(self.value))
         let floatValue = Float(intValue)
         
         setThumbForSliderValue(floatValue)
     }
     
-    internal func didMoveSliderStepValue(_ sendValueChangedEvent: Bool = false) {
+    @objc internal func didMoveSliderStepValue(_ sendValueChangedEvent: Bool = false) {
         let intValue = Int(round(self.value))
         let floatValue = Float(intValue)
         
@@ -126,7 +126,7 @@ class G8SliderStep: UISlider {
         }) 
     }
     
-    internal func setThumbForSliderValue(_ value: Float) {
+    @objc internal func setThumbForSliderValue(_ value: Float) {
         if let selectionImage = thumbForSliderValue(value) {
             self.setThumbImage(selectionImage, for: UIControlState())
             self.setThumbImage(selectionImage, for: UIControlState.selected)
@@ -134,7 +134,7 @@ class G8SliderStep: UISlider {
         }
     }
     
-    internal func thumbForSliderValue(_ value: Float) -> UIImage? {
+    @objc internal func thumbForSliderValue(_ value: Float) -> UIImage? {
         let intValue = Int(round(value))
         let imageIndex = intValue - Int(minimumValue)
         
@@ -145,7 +145,7 @@ class G8SliderStep: UISlider {
         return nil
     }
     
-    internal func rectForValue(_ value: Float) -> CGRect {
+    @objc internal func rectForValue(_ value: Float) -> CGRect {
         let trackRect = self.trackRect(forBounds: bounds)
         let rect = thumbRect(forBounds: bounds, trackRect: trackRect, value: value)
         return rect
@@ -193,7 +193,7 @@ class G8SliderStep: UISlider {
         drawImages()
     }
     
-    internal func drawLabels() {
+    @objc internal func drawLabels() {
         guard let ti = tickTitles else {
             return
         }
@@ -237,7 +237,7 @@ class G8SliderStep: UISlider {
         }
     }
     
-    internal func drawImages() {
+    @objc internal func drawImages() {
         guard let ti = tickImages else {
             return
         }
@@ -279,7 +279,7 @@ class G8SliderStep: UISlider {
         }
     }
     
-    internal func drawTrack() {
+    @objc internal func drawTrack() {
         
         let ctx = UIGraphicsGetCurrentContext()
         ctx?.saveGState()
