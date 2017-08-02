@@ -38,7 +38,7 @@ Features:
 - Draggable
 - Titles support
 - Rotation support
-- Swift 2 support
+- Swift 3 support
 
 ToDo:
 -----
