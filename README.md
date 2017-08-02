@@ -38,7 +38,7 @@ Features:
 - Draggable
 - Titles support
 - Rotation support
-- Swift 3 support
+- Swift 4 ready
 
 ToDo:
 -----
@@ -46,6 +46,9 @@ ToDo:
 
 Release note:
 -----
+##### v3.0.0
+- Swift 4 support: use branch master
+
 ##### v2.0.1
 - Master supports sliderStep.value programmatically
 
